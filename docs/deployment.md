@@ -263,6 +263,35 @@ pm2 restart cui-server
 
 ## 相关链接
 
-- [CUI GitHub仓库](https://github.com/wbopan/cui)
+- [CUI原始仓库](https://github.com/wbopan/cui) (上游)
+- [CUI定制Fork](https://github.com/wuyouchao/cui) (当前使用)
 - [Claude Code文档](https://docs.anthropic.com/en/docs/claude-code)
 - [PM2文档](https://pm2.keymetrics.io/)
+
+## GitHub Token缓存配置
+
+为了避免每次推送都输入token，可以选择以下方案之一：
+
+**方案1：URL配置（推荐，最方便）**
+```bash
+# 将token直接配置在远程URL中
+git remote set-url origin https://wuyouchao:YOUR_GITHUB_TOKEN@github.com/wuyouchao/cui.git
+
+# 以后直接push，不需要输入密码
+git push
+```
+
+**方案2：凭证缓存**
+```bash
+# 缓存8小时（工作时间够用）
+git config --global credential.helper 'cache --timeout=28800'
+
+# 或永久存储（注意安全性）
+git config --global credential.helper store
+```
+
+**验证配置**
+```bash
+git config --global credential.helper
+git remote -v
+```
